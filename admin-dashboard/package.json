@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.10.4",
+    "apollo-server": "^3.13.0",
+    "graphql": "^16.8.1",
     "next": "14.2.3",
     "prisma": "^5.15.0",
     "react": "^18",
