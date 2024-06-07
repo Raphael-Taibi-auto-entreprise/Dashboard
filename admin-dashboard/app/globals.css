@@ -3,31 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+  --background: 283 47% 2%;
+  --foreground: 283 27% 98%;
+  --muted: 283 13% 8%;
+  --muted-foreground: 283 4% 63%;
+  --popover: 283 47% 2%;
+  --popover-foreground: 283 27% 98%;
+  --card: 283 47% 3%;
+  --card-foreground: 283 27% 99%;
+  --border: 215 27.9% 16.9%;
+  --input: 215 27.9% 16.9%;
+  --primary: 283 93% 25%;
+  --primary-foreground: 283 93% 85%;
+  --secondary: 283 18% 12%;
+  --secondary-foreground: 283 18% 72%;
+  --accent: 283 25% 17%;
+  --accent-foreground: 283 25% 77%;
+  --destructive: 4 84% 49%;
+  --destructive-foreground: 0 0% 100%;
+  --ring: 283 93% 25%;
 }
