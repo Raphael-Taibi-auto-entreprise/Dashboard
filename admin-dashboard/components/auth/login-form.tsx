@@ -1,6 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import { useState, useTransition } from "react";
 import * as z from "zod";
 import { LoginSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,8 +16,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { CardWrapper } from "@/components/auth/card-wrapper";
+import { FormError } from "@/components/form-error";
+import { FormSuccess } from "@/components/form-success";
+import { login } from "@/actions/login";
 
 export const LoginForm = () => {
+     const [error, setError] = useState<string | undefined>("");
+     const [success, setSuccess] = useState<string | undefined>("");
+     const [isPending, startTransition] = useTransition();
      const form = useForm<z.infer<typeof LoginSchema>>({
           resolver: zodResolver(LoginSchema),
           defaultValues: {
@@ -25,6 +32,18 @@ export const LoginForm = () => {
           },
      });
 
+     const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+          //console.log(values); Check the value ✅
+          setError("");
+          setSuccess("");
+          startTransition(() => {
+               login(values)
+                    .then((data) => {
+                         setError(data.error);
+                         setSuccess(data.success);
+                    });
+          });
+     };
 
      return (
           <CardWrapper
@@ -35,7 +54,7 @@ export const LoginForm = () => {
           >
                <Form {...form}>
                     <form
-                         onSubmit={form.handleSubmit(() => { })}
+                         onSubmit={form.handleSubmit(onSubmit)}
                          className="space-y-6"
                     >
                          <div className="space-y-4">
@@ -48,6 +67,7 @@ export const LoginForm = () => {
                                              <FormControl>
                                                   <Input
                                                        {...field}
+                                                       disabled={isPending}
                                                        placeholder="jhon.doe@exemple.com"
                                                        type="email"
                                                   />
@@ -65,6 +85,7 @@ export const LoginForm = () => {
                                              <FormControl>
                                                   <Input
                                                        {...field}
+                                                       disabled={isPending}
                                                        placeholder="*****"
                                                        type="password"
                                                   />
@@ -74,7 +95,10 @@ export const LoginForm = () => {
                                    )}
                               />
                          </div>
+                         <FormError message={error} />
+                         <FormSuccess message={success} />
                          <Button
+                              disabled={isPending}
                               type="submit"
                               className="w-full rounded hover:bg-accent focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:text-secondary-foreground"
                          >
