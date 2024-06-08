@@ -12,12 +12,12 @@ export const BackButton = ({
     href,
     label,
 }: BackButtonProps) => {
-    return(
-        <Button 
+    return (
+        <Button
             variant="link"
             className='font-normal w-full focus:text-secondary-foreground'
             size="sm"
-            asChild    
+            asChild
         >
             <Link href={href}>
                 {label}

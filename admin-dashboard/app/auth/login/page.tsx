@@ -2,9 +2,9 @@ import { LoginForm } from '@/components/auth/login-form';
 
 
 const loginPage = () => {
-    return ( 
+    return (
         <LoginForm />
-     );
+    );
 }
- 
+
 export default loginPage;
